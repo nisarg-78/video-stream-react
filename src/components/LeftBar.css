@@ -1,0 +1,65 @@
+@import url(https://fonts.bunny.net/css?family=abeezee:400);
+
+.left-bar {
+	border-right: 1px solid gray;
+	color: aliceblue;
+	font-family: "AbeeZee", sans-serif;
+	padding: 20px;
+}
+
+.go-live a {
+	all: unset;
+}
+
+.go-live button {
+	all: unset;
+	display: inline-block;
+	width: 15ch;
+	text-align: center;
+	background-color: transparent;
+	padding: 5px 0;
+	color: white;
+	border: 1px solid white;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.go-live button:hover {
+	background-color: lightgray;
+	background-color: red;
+}
+
+.tags {
+	display: flex;
+	flex-direction: column;
+}
+
+.tag {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.tag input[type="checkbox"] {
+	display: none;
+}
+
+.tag label {
+	display: inline-block;
+	padding: 5px;
+	background-color: transparent;
+	color: white;
+	border: 1px solid gray;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.tag input[type="checkbox"]:checked + label {
+	background-color: #ef233c;
+	color: #000000;
+}
+
+.tag label:hover {
+	background-color: lightgray;
+	color: black;
+}
