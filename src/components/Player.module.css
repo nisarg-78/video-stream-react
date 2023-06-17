@@ -1,0 +1,72 @@
+.video-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+.player-wrapper {
+	position: relative;
+	max-width: 80%;
+}
+
+.player {
+	object-fit: cover;
+	padding: 0;
+	margin: 0;
+}
+
+.controls-container {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
+.video-consumed,
+.video-buffered {
+	position: absolute;
+	height: 3px;
+}
+
+.video-progress {
+	width: 100%;
+	height: 3px;
+	background-color: rgba(255, 255, 255, 0.336);
+	display: flex;
+	position: relative;
+}
+
+.video-bar {
+	position: absolute;
+	bottom: -50%;
+	min-width: 100%;
+	height: 20px;
+	z-index: 2;
+	cursor: pointer;
+}
+
+.video-consumed {
+	background-color: #ef233c;
+	z-index: 1;
+}
+
+.video-buffered {
+	background-color: rgba(255, 232, 232, 0.5);
+}
+
+.control-handles{
+	display: flex;
+	background-color: rgba(36, 36, 36, 0.95);
+}
+
+.control-handles button{
+	all: unset;
+	height: 1em;
+	width: 1em;
+	padding: 0.25em;
+	margin: 0;
+	font-size: 1.5rem;
+	color: #fff;
+}

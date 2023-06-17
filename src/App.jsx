@@ -1,15 +1,17 @@
-import { Routes, Route, useParams } from "react-router-dom"
-import VideoPlayer from "./components/VideoPlayer"
+import './App.css'
+import { Routes, Route } from "react-router-dom"
 import Home from "./components/Home"
+import Player from "./components/Player"
+import Live from "./components/Live"
 
 function App() {
-	const { id } = useParams()
-  const src = 'https://video-stream-7f9u.onrender.com/videos/' + id;
+	const src = "https://video-stream-7f9u.onrender.com/videos/"
 
 	return (
 		<Routes>
 			<Route path='/' element={<Home />} />
-			<Route path='/:id' element={<VideoPlayer src={src} />} />
+			<Route path='/live' element={<Live/>} />
+			<Route path='/:id' element={<Player src={src} />} />
 		</Routes>
 	)
 }

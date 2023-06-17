@@ -55,7 +55,7 @@
 }
 
 .tag input[type="checkbox"]:checked + label {
-	background-color: #ef233c;
+	background-color: lightgray;
 	color: #000000;
 }
 

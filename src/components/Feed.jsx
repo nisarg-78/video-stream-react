@@ -33,7 +33,6 @@ export default function Feed() {
 					<VideoThumbnail
 						key={video._id}
 						id={video.id}
-						src={'https://video-stream-7f9u.onrender.com/videos/' + video.id}
 						title={video.title}
 						img={video.thumbnail}
 					/>

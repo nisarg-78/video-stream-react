@@ -1,4 +1,6 @@
-import React from "react"
+import styles from "./VideoPlayer.module.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay, faPause, faExpand, faCompress, faVolumeMute, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect, useRef } from "react"
 import Hls from "hls.js"
 
@@ -10,33 +12,33 @@ const VideoPlayer = ({ src }) => {
 	const videoConsumedBarRef = useRef(null)
 	const playerControlsRef = useRef(null)
 	const [volumeSliderValue, setVolumeSliderValue] = useState(0)
-	const [maxVolume, setMaxVolume] = useState(100)
 	const [isMuted, setIsMuted] = useState(false)
 	const [resolutions, setResolutions] = useState([])
 	const [isFullscreen, setIsFullscreen] = useState(false)
 	const [playing, setPlaying] = useState(false)
-	const [bufferedTime, setBufferedTime] = useState(0)
-	const [playbackTime, setPlaybackTime] = useState(0)
+	let playbackTime = 0
+	let bufferedTime = 0
+	let maxVolume = 100
 	let hls
 	let showControlsTimeout = null
-	let duration = 0
+	let duration = hls && playbackTime ? video.duration : 0;
 
 	useEffect(() => {
-		console.log("src", src)
+		src = "https://video-stream-7f9u.onrender.com/videos/valoMusic"
 		if (Hls.isSupported()) {
 			hls = new Hls({
 				forceKeyFrameOnDiscontinuity: true,
 			})
 			hls.loadSource(src)
 			console.log(hls)
-			hls.attachMedia(videoRef)
+			hls.attachMedia(videoRef.current)
 			hls.enableWorker = true
 
 			//TODO: Add subtitle support
 			hls.subtitleDisplay = false
 
 			console.log("Duration:", videoRef.current.duration)
-			setPlaybackTime(videoRef.current.duration)
+			playbackTime = videoRef.current.duration
 
 			hls.on(Hls.Events.MEDIA_ATTACHED, function () {})
 			hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
@@ -51,21 +53,23 @@ const VideoPlayer = ({ src }) => {
 			})
 
 			videoRef.current.addEventListener("progress", function () {
-				let buffered = video?.buffered
+				let buffered = videoRef?.current?.buffered
 				if (buffered && buffered.length > 0) {
-					setBufferedTime(buffered.end(buffered.length - 1))
+					bufferedTime = buffered.end(buffered.length - 1)
 				}
 			})
 
+			duration = hls && playbackTime ? video.duration : 0;
 			const value = localStorage.getItem("volume")
 			setVolumeSliderValue(value)
+			videoRef.current.play()
+			videoRef.current.muted = false
 			setPlaying(true)
-			setIsMuted(false)
 		}
 	}, [src])
 
 	const handlePlay = () => {
-		if (!video) return
+		if (!videoRef.current) return
 		if (!playing) {
 			setPlaying(true)
 			videoRef.current.play()
@@ -76,19 +80,19 @@ const VideoPlayer = ({ src }) => {
 	}
 
 	const handleWaiting = () => {
-		setLoaderIcon(document.createElement("div"))
+		loaderIconRef.current.style.display = 'block';
 	}
 
 	const handlePlaying = () => {
-		setLoaderIcon(null)
+		loaderIconRef.current.style.display = 'none';
 	}
 
 	const handleMouseMove = () => {
 		document.body.style.cursor = "auto"
 		if (showControlsTimeout) clearTimeout(showControlsTimeout)
-		setPlayerControls(document.createElement("div"))
+		playerControlsRef.current.style.opacity = 1
 		showControlsTimeout = setTimeout(() => {
-			setPlayerControls(null)
+			playerControlsRef.current.style.opacity = 0
 			document.body.style.cursor = "none"
 		}, 3000)
 	}
@@ -117,14 +121,15 @@ const VideoPlayer = ({ src }) => {
 			document.exitFullscreen()
 			setIsFullscreen(false)
 		} else {
-			playerContainer.requestFullscreen()
+			playerContainerRef.current.requestFullscreen()
 			setIsFullscreen(true)
 		}
 	}
 
 	const handlePlayback = (event) => {
 		const time = event.target.value
-		setPlaybackTime(time)
+		playbackTime = time
+		console.log(videoRef)
 		videoRef.current.currentTime = time
 	}
 
@@ -149,13 +154,31 @@ const VideoPlayer = ({ src }) => {
 	}
 
 	const handleTimeUpdate = () => {
-		setPlaybackTime(videoRef.current.currentTime)
+		playbackTime = videoRef.current.currentTime
+	}
+
+	function handleSeek(event) {
+		if (event.type === 'click') {
+			const newTime = (event.offsetX / event.target.offsetWidth) * duration;
+			console.log(duration)
+			videoRef.current.currentTime = newTime;
+			playbackTime = newTime;
+			videoRef.current.play();
+		}
+		if (event.type === 'mousemove') {
+			if (event.buttons !== 1) return;
+			videoConsumedBarRef.current.style.transform = 'scaleX(1)';
+			const newTime = (event.offsetX / event.target.offsetWidth) * duration;
+			videoRef.current.currentTime = newTime;
+			playbackTime = newTime;
+			videoRef.current.pause();
+		}
 	}
 
 	const handleProgress = () => {
-		let buffered = video?.buffered
+		let buffered = video?.current.buffered
 		if (buffered && buffered.length > 0) {
-			setBufferedTime(buffered.end(buffered.length - 1))
+			bufferedTime = buffered.end(buffered.length - 1)
 		}
 	}
 
@@ -164,25 +187,23 @@ const VideoPlayer = ({ src }) => {
 	}
 
 	return (
-		<div className='container'>
+		<div className={styles.container}>
 			<div
-				className='player-container'
+				className={styles['player-container']}
 				ref={playerContainerRef}
 				onMouseMove={handleMouseMove}
 				onMouseLeave={() => {
-					playerControls.style.opacity = 0
+					playerControlsRef.current.style.opacity = 0
 				}}>
-				{/* svelte-ignore a11y-media-has-caption */}
 				<video
-					className='video'
-					muted='true'
+					className={styles.video}
+					muted={true}
 					ref={videoRef}
 					onClick={handlePlay}
 					onDoubleClick={handleFullscreen}
 					onWaiting={handleWaiting}
 					onCanPlay={handlePlaying}
 					onPlaying={handlePlaying}
-					currentTime={playbackTime}
 				/>
 
 				{/* loading icon */}
@@ -199,7 +220,7 @@ const VideoPlayer = ({ src }) => {
 					height='50px'
 					viewBox='0 0 100 100'
 					preserveAspectRatio='xMidYMid'
-					className='loader'
+					className={styles.loader}
 					ref={loaderIconRef}>
 					<circle
 						cx='50'
@@ -220,51 +241,44 @@ const VideoPlayer = ({ src }) => {
 					</circle>
 				</svg>
 
-				<div className='controls' ref={playerControlsRef}>
-					{/* svelte-ignore a11y-click-events-have-key-events */}
+				<div className={styles.controls} ref={playerControlsRef}>
 					<div
-						className='video-progress'
+						className={styles['video-progress']}
 						onMouseMove={(e) => handleSeek(e)}
 						onClick={(e) => handleSeek(e)}>
-						<div className='video-bar' />
+						<div className={styles['video-bar']} />
 						<div
-							className='video-consumed'
+							className={styles['video-consumed']}
 							ref={videoConsumedBarRef}
 							style={{
 								minWidth: `${(playbackTime / duration) * 100}%`,
 							}}
 						/>
 						<div
-							className='video-buffered'
+							className={styles['video-buffered']}
 							style={{
 								minWidth: `${(bufferedTime / duration) * 100}%`,
 							}}
 						/>
 					</div>
 
-					<div className='control-handles'>
+					<div className={styles['control-handles']}>
 						{/* play/pause handle  */}
 						<div>
 							{playing ? (
 								<button onClick={handlePlay}>
-									<i
-										className='fa fa-pause'
-										aria-hidden='true'
-									/>
+									<FontAwesomeIcon icon={faPause} />
 								</button>
 							) : (
 								<button onClick={handlePlay}>
-									<i
-										className='fa-solid fa-play'
-										aria-hidden='true'
-									/>
+									<FontAwesomeIcon icon={faPlay} />
 								</button>
 							)}
 						</div>
 
 						{/* playback time */}
-						<div className='progress-time'>
-							{/* {new Date(
+						<div className={styles['progress-time']}>
+							{new Date(
 								Number(Number(playbackTime).toFixed(0)) * 1000
 							)
 								.toISOString()
@@ -272,24 +286,18 @@ const VideoPlayer = ({ src }) => {
 							/
 							{new Date(duration * 1000)
 								.toISOString()
-								.substring(14, 19)} */}
+								.substring(14, 19)}
 						</div>
 
 						{/* volume handle */}
-						<div className='volume-handle'>
+						<div className={styles['volume-handle']}>
 							{isMuted ? (
 								<button onClick={handleMute}>
-									<i
-										className='fa fa-volume-off'
-										aria-hidden='true'
-									/>
+									<FontAwesomeIcon icon={faVolumeMute} />
 								</button>
 							) : (
 								<button onClick={handleMute}>
-									<i
-										className='fa fa-volume-up'
-										aria-hidden='true'
-									/>
+									<FontAwesomeIcon icon={faVolumeUp} />
 								</button>
 							)}
 							<input
@@ -304,17 +312,13 @@ const VideoPlayer = ({ src }) => {
 						</div>
 
 						{/* quality handle */}
-						<div className='resolution-selector'>
+						<div className={styles['resolution-selector']}>
 							<select
 								onChange={handleQaulity}
 								name='quality'
 								id='quality'>
-								{resolutions.map((res) => (
-									<option value={res}>{`${res[0]}p (${(
-										res[1] /
-										1024 /
-										1024
-									).toFixed(2)}Mbps)`}</option>
+								{resolutions.map((res, index) => (
+									<option key={index} value={res}>{`${res[0]}p (${(res[1] / 1024 / 1024).toFixed(2)}Mbps)`}</option>
 								))}
 								<option value='auto'>{`Auto ${
 									hls?.levels[level]?.height
@@ -328,17 +332,11 @@ const VideoPlayer = ({ src }) => {
 						<div>
 							{isFullscreen ? (
 								<button onClick={handleFullscreen}>
-									<i
-										className='fa fa-compress'
-										aria-hidden='true'
-									/>
+									<FontAwesomeIcon icon={faCompress} />
 								</button>
 							) : (
 								<button onClick={handleFullscreen}>
-									<i
-										className='fa fa-expand'
-										aria-hidden='true'
-									/>
+									<FontAwesomeIcon icon={faExpand} />
 								</button>
 							)}
 						</div>

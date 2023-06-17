@@ -2,6 +2,8 @@ import "./LeftBar.css"
 import { useEffect, useState, useContext } from "react"
 
 import { FeedContext } from "../contexts/FeedContext"
+import { Link } from "react-router-dom"
+import Live from "./Live"
 
 export default function Feed() {
 	const { tags, updateTags } = useContext(FeedContext)
@@ -9,9 +11,9 @@ export default function Feed() {
 	return (
 		<div className='left-bar'>
 			<div className='go-live'>
-				<a href='/stream/wassup'>
+				<Link to='/live'>
 					<button>Go Live</button>
-				</a>
+				</Link>
 			</div>
 
 			<div className='categories'>
