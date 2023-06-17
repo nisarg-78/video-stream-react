@@ -9,7 +9,6 @@ export default function Live() {
 	const [screen, setScreen] = useState()
 
 	useEffect(() => {
-
 		navigator.mediaDevices.enumerateDevices().then((devices) => {
 			const screens = devices.filter(
 				(device) => device.kind === "videoinput"
@@ -57,6 +56,10 @@ export default function Live() {
 			<div className={styles.container}>
 				<div className={styles.setup}>
 					<div>
+						<button onClick={startScreenSharing}>Use Screen</button>
+					</div>
+
+					<div>
 						{cameras.map((camera) => (
 							<div key={camera.deviceId}>
 								<input
@@ -71,9 +74,13 @@ export default function Live() {
 							</div>
 						))}
 					</div>
-					<button onClick={startScreenSharing}>Use Screen</button>
+
 					<div>
 						<video src='' ref={preview}></video>
+					</div>
+
+					<div>
+						<button>Start</button>
 					</div>
 				</div>
 			</div>
