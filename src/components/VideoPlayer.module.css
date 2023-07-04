@@ -1,7 +1,7 @@
-@import url('https://fonts.bunny.net/css?family=andika:400');
+@import url(https://fonts.bunny.net/css?family=open-sans:400);
 
 .container {
-	font-family: "Andika", sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	background-color: #232a30;
 	height: 100%;
 	display: flex;

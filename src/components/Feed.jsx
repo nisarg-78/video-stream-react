@@ -13,11 +13,13 @@ export default function Feed() {
 
 	useEffect(() => {
 		fetch(
-			"https://video-stream-7f9u.onrender.com/videos?tags=" +
+			"http://127.0.0.1:3000/videos/all?tags=" +
+			// "https://video-stream-7f9u.onrender.com/videos/all?tags=" +
 				(tags ? tags : "")
 		)
 			.then((res) => res.json())
 			.then((data) => {
+				console.log(data)
 				setFeedVideos(data)
 			})
 		console.log("Feed mounted")
