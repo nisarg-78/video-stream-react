@@ -75,7 +75,7 @@ video {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	/* opacity: 0; */
+	opacity: 0;
 	transition: opacity 0.3s;
 }
 
