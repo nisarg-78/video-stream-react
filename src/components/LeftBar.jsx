@@ -11,15 +11,14 @@ export default function Feed() {
 	return (
 		<div className='left-bar'>
 			<div className='go-live'>
-				<Link to='/live'>
-					<button>Go Live</button>
-				</Link>
+				<h1>Stream.ts</h1>
+				<hr />
 			</div>
 
 			<div className='categories'>
-				<h1>
+				<h3>
 					<label htmlFor='tags'>Tags</label>
-				</h1>
+				</h3>
 				<div className='tags'>
 					<div className='tag'>
 						<input
