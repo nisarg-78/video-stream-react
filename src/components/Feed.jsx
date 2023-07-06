@@ -13,8 +13,8 @@ export default function Feed() {
 
 	useEffect(() => {
 		fetch(
-			"http://127.0.0.1:3000/videos/all?tags=" +
-			// "https://video-stream-7f9u.onrender.com/videos/all?tags=" +
+			// "http://127.0.0.1:3000/videos/all?tags=" +
+			"https://video-stream-7f9u.onrender.com/videos/all?tags=" +
 				(tags ? tags : "")
 		)
 			.then((res) => res.json())
