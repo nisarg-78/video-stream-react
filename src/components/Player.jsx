@@ -14,7 +14,7 @@ import {
 
 export default function Player({ src }) {
 	const { id } = useParams()
-	src = 'http://127.0.0.1:3000/videos/id/'+id
+	src = 'https://video-stream-7f9u.onrender.com/videos/id/'+id
 	
 	const player = useRef(null)
 	const videoWrapper = useRef(null)
