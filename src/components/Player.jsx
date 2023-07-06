@@ -14,8 +14,8 @@ import {
 
 export default function Player({ src }) {
 	const { id } = useParams()
-	src += id
-
+	src = 'http://127.0.0.1:3000/videos/id/'+id
+	
 	const player = useRef(null)
 	const videoWrapper = useRef(null)
 	const volumeSlider = useRef(null)
@@ -296,7 +296,7 @@ export default function Player({ src }) {
 									name='quality'
 									id='quality'>
 									{resolutions?.map((res) => (
-										<option value={res} key={res[0]}>
+										<option value={res} key={res[1]}>
 											{res[0]}p (
 											{(res[1] / 1024 / 1024).toFixed(2)}
 											Mbps)

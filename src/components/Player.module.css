@@ -75,7 +75,7 @@ video {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	opacity: 0;
+	/* opacity: 0; */
 	transition: opacity 0.3s;
 }
 
@@ -120,6 +120,10 @@ video {
 	background-color: rgba(36, 36, 36, 0.95);
 }
 
+.control-handles div {
+	display: flex;
+}
+
 .control-handles button {
 	all: unset;
 	height: 1em;
@@ -130,6 +134,6 @@ video {
 	color: #fff;
 }
 
-.resolution-selector{
+.resolution-selector {
 	margin-left: auto;
 }
