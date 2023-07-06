@@ -41,7 +41,7 @@ export default function Player({ src }) {
 		const fetchData = async () => {
 			try {
 				const response = await fetch(
-					`http://localhost:3000/videos/info/${id}`
+					`https://video-stream-7f9u.onrender.com/videos/info/${id}`
 				)
 				const data = await response.json()
 
@@ -49,7 +49,7 @@ export default function Player({ src }) {
 					setVideoJson(data[0])
 
 					const similarVideosResponse = await fetch(
-						`http://localhost:3000/videos/all?tags=${data[0]?.tags?.join(
+						`https://video-stream-7f9u.onrender.com/videos/all?tags=${data[0]?.tags?.join(
 							","
 						)}`
 					)
