@@ -390,7 +390,7 @@ export default function Player() {
 				{/* video title and description */}
 				<div className={styles.info}>
 					<div className={styles.name}>
-						<div>{location.state.title ? location.state.title : videoJson?.title}</div>
+						<div>{location?.state?.title ? location?.state?.title : videoJson?.title}</div>
 						<div className={styles.date}>
 							{videoJson?.date &&
 								new Date(videoJson?.date).toDateString()}
