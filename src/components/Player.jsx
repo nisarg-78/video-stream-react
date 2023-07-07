@@ -17,7 +17,9 @@ export default function Player() {
 	const { id } = useParams()
 	const location = useLocation()
 
-	const src = location?.state?.src ? location?.state?.src : ENDPOINT + "/videos/id/" + id
+	const src = location?.state?.src
+		? location?.state?.src
+		: ENDPOINT + "/videos/id/" + id
 
 	const player = useRef(null)
 	const videoWrapper = useRef(null)
@@ -206,6 +208,24 @@ export default function Player() {
 		})
 	}
 
+	function formatTime(time) {
+		if (isNaN(time)) return "00:00:00"
+
+		const hours = Math.floor(time / 3600)
+		const minutes = Math.floor((time % 3600) / 60)
+		const seconds = Math.floor(time % 60)
+
+		const formattedHours = hours > 9 ? hours : `0${hours}`
+		const formattedMinutes = minutes > 9 ? minutes : `0${minutes}`
+		const formattedSeconds = seconds > 9 ? seconds : `0${seconds}`
+
+		if (hours > 0) {
+			return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
+		} else {
+			return `${formattedMinutes}:${formattedSeconds}`
+		}
+	}
+
 	return (
 		<>
 			<div className={styles.parent}>
@@ -277,21 +297,11 @@ export default function Player() {
 							{/* video time */}
 							{player?.current?.getCurrentTime() && (
 								<div className={styles["video-time"]}>
-									{new Date(
-										Number(
-											Number(
-												player?.current?.getCurrentTime()
-											).toFixed(0)
-										) * 1000
-									)
-										.toISOString()
-										.substring(14, 19)}
-									/
-									{new Date(
-										player?.current?.getDuration() * 1000
-									)
-										.toISOString()
-										.substring(14, 19)}
+									{formatTime(
+										player?.current?.getCurrentTime()
+									)}{" "}
+									/{" "}
+									{formatTime(player?.current?.getDuration())}
 								</div>
 							)}
 
@@ -390,7 +400,11 @@ export default function Player() {
 				{/* video title and description */}
 				<div className={styles.info}>
 					<div className={styles.name}>
-						<div>{location?.state?.title ? location?.state?.title : videoJson?.title}</div>
+						<div>
+							{location?.state?.title
+								? location?.state?.title
+								: videoJson?.title}
+						</div>
 						<div className={styles.date}>
 							{videoJson?.date &&
 								new Date(videoJson?.date).toDateString()}
