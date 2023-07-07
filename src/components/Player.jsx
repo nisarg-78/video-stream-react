@@ -17,7 +17,7 @@ export default function Player() {
 	const { id } = useParams()
 	const location = useLocation()
 
-	const src = location.state.src ? location.state.src : ENDPOINT + "/videos/id/" + id
+	const src = location?.state?.src ? location?.state?.src : ENDPOINT + "/videos/id/" + id
 
 	const player = useRef(null)
 	const videoWrapper = useRef(null)
