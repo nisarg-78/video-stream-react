@@ -26,16 +26,26 @@ export default function Feed() {
 
 	return (
 		<>
-			<div className={styles.videos}>
-				{feedVideos.map((video, index) => (
-					<VideoThumbnail
-						key={video._id}
-						id={video.id}
-						title={video.title}
-						img={video.thumbnail}
-					/>
-				))}
-			</div>
+			{feedVideos.length === 0 ? (
+				<div className={styles.error}>
+					No Videos Found, reasons could be:
+					<ul>
+						<li>The server is sleeping, please wait a minute or two.</li>
+						<li>There are no videos with provided tags.</li>
+					</ul>
+				</div>
+			) : (
+				<div className={styles.videos}>
+					{feedVideos.map((video, index) => (
+						<VideoThumbnail
+							key={video._id}
+							id={video.id}
+							title={video.title}
+							img={video.thumbnail}
+						/>
+					))}
+				</div>
+			)}
 		</>
 	)
 }

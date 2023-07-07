@@ -1,4 +1,9 @@
-@import url(https://fonts.bunny.net/css?family=open-sans:400);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
 .parent {
 	height: 100%;
 	width: 100%;
@@ -9,7 +14,6 @@
 		"info info suggestions";
 	grid-template-columns: 2fr 2fr 1fr;
 	grid-template-rows: 2fr 2fr 1fr;
-	font-family: "Open Sans", sans-serif;
 	font-weight: bold;
 	color: #fff;
 }
@@ -94,6 +98,7 @@ video {
 	font-size: 0.9em;
 	font-weight: 100;
 	padding: 0em 0.5em;
+	letter-spacing: 1px;
 }
 
 .video-consumed,
@@ -153,8 +158,17 @@ video {
 	outline: 2px solid #fff;
 }
 
-.resolution-selector {
+.left{
+	display: flex;
 	margin-left: auto;
+}
+
+.caption-button{
+	display: flex;
+	align-items: center;
+}
+
+.resolution-selector {
 }
 
 .volume *{

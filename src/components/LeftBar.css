@@ -68,3 +68,24 @@
 	background-color: lightgray;
 	color: black;
 }
+
+.movies{
+	display: flex;
+	flex-direction: column;
+}
+
+a{
+	all: unset;
+}
+
+.movie{
+	border: 1px solid gray;
+	padding: 5px;
+	background-color: white;
+	color: rgb(48, 48, 48);
+	cursor: pointer;
+}
+
+.movie:hover{
+	background-color: lightgray;
+}

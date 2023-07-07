@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
 .videos {
     width: 80%;
     padding: 2em;
@@ -5,4 +11,10 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 2em;
+}
+
+.error{
+    margin: 3em;
+    color: white;
+    margin-top: 2em;
 }

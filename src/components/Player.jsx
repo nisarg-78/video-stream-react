@@ -2,6 +2,7 @@ import styles from "./Player.module.css"
 import { ENDPOINT } from "../urls"
 import VideoThumbnail from "./VideoThumbnail"
 import React, { useState, useRef, useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import ReactPlayer from "react-player"
 import {
@@ -10,18 +11,20 @@ import {
 	BsVolumeUpFill,
 	BsVolumeMuteFill,
 } from "react-icons/bs"
-
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai"
 
 export default function Player() {
 	const { id } = useParams()
-	const src = ENDPOINT + "/videos/id/" + id
+	const location = useLocation()
+
+	const src = location.state.src ? location.state.src : ENDPOINT + "/videos/id/" + id
 
 	const player = useRef(null)
 	const videoWrapper = useRef(null)
 	const volumeSlider = useRef(null)
 	const playerControls = useRef(null)
 
+	const [caption, setCaption] = useState(false)
 	const [internalPlayer, setInternalPlayer] = useState(null)
 	const [videoJson, setVideoJson] = useState(null)
 	const [resolutions, setResolutions] = useState(null)
@@ -277,7 +280,7 @@ export default function Player() {
 									{new Date(
 										Number(
 											Number(
-												player.current.getCurrentTime()
+												player?.current?.getCurrentTime()
 											).toFixed(0)
 										) * 1000
 									)
@@ -285,7 +288,7 @@ export default function Player() {
 										.substring(14, 19)}
 									/
 									{new Date(
-										player.current.getDuration() * 1000
+										player?.current?.getDuration() * 1000
 									)
 										.toISOString()
 										.substring(14, 19)}
@@ -315,32 +318,45 @@ export default function Player() {
 								/>
 							</div>
 
-							{/* quality selector */}
-							<div className={styles["resolution-selector"]}>
-								<select
-									onChange={handleQuality}
-									name='quality'
-									id='quality'>
-									{resolutions?.map((res) => (
-										<option value={res} key={res[1]}>
-											{res[0]}p (
-											{(res[1] / 1024 / 1024).toFixed(2)}
-											Mbps)
-										</option>
-									))}
-									<option value='auto'>Auto</option>
-								</select>
-							</div>
+							<div className={styles["left"]}>
+								{/* quality selector */}
+								<div className={styles["resolution-selector"]}>
+									<select
+										onChange={handleQuality}
+										name='quality'
+										id='quality'>
+										{resolutions?.map((res) => (
+											<option value={res} key={res[1]}>
+												{res[0]}p (
+												{(res[1] / 1024 / 1024).toFixed(
+													2
+												)}
+												Mbps)
+											</option>
+										))}
+										<option value='auto'>Auto</option>
+									</select>
+								</div>
+								{/* caption button */}
+								{/* <div className={styles["caption-button"]}>
+									<button
+										onClick={() => {
+											setCaption((caption) => !caption)
+										}}>
+										{caption ? "CC" : "CC"}
+									</button>
+								</div> */}
 
-							{/* fullscreen handle */}
-							<div className={styles.fullscreen}>
-								<button onClick={handleFullscreen}>
-									{isFullscreen ? (
-										<AiOutlineFullscreenExit />
-									) : (
-										<AiOutlineFullscreen />
-									)}
-								</button>
+								{/* fullscreen handle */}
+								<div className={styles.fullscreen}>
+									<button onClick={handleFullscreen}>
+										{isFullscreen ? (
+											<AiOutlineFullscreenExit />
+										) : (
+											<AiOutlineFullscreen />
+										)}
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -374,9 +390,10 @@ export default function Player() {
 				{/* video title and description */}
 				<div className={styles.info}>
 					<div className={styles.name}>
-						<div>{videoJson?.title}</div>
+						<div>{location.state.title ? location.state.title : videoJson?.title}</div>
 						<div className={styles.date}>
-							{new Date(videoJson?.date).toDateString()}
+							{videoJson?.date &&
+								new Date(videoJson?.date).toDateString()}
 						</div>
 					</div>
 				</div>
