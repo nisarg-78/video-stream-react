@@ -1,5 +1,5 @@
 import styles from "./Feed.module.css"
-
+import { ENDPOINT } from "../urls"
 import { useEffect, useState, useContext } from "react"
 
 import { FeedContext } from "../contexts/FeedContext"
@@ -12,11 +12,7 @@ export default function Feed() {
 	const [feedVideos, setFeedVideos] = useState([])
 
 	useEffect(() => {
-		fetch(
-			// "http://127.0.0.1:3000/videos/all?tags=" +
-			"https://video-stream-7f9u.onrender.com/videos/all?tags=" +
-				(tags ? tags : "")
-		)
+		fetch(`${ENDPOINT}/videos/all?tags=${tags ? tags : ""}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data)

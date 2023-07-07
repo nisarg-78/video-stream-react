@@ -11,7 +11,7 @@ import {
 	BsVolumeMuteFill,
 } from "react-icons/bs"
 
-import {AiOutlineFullscreen, AiOutlineFullscreenExit} from "react-icons/ai"
+import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai"
 
 export default function Player() {
 	const { id } = useParams()
@@ -41,16 +41,14 @@ export default function Player() {
 		// fetch video data and similar videos
 		const fetchData = async () => {
 			try {
-				const response = await fetch(
-					`https://video-stream-7f9u.onrender.com/videos/info/${id}`
-				)
+				const response = await fetch(`${ENDPOINT}/videos/info/${id}`)
 				const data = await response.json()
 
 				if (data[0]) {
 					setVideoJson(data[0])
 
 					const similarVideosResponse = await fetch(
-						`https://video-stream-7f9u.onrender.com/videos/all?tags=${data[0]?.tags?.join(
+						`${ENDPOINT}/videos/all?tags=${data[0]?.tags?.join(
 							","
 						)}`
 					)

@@ -81,7 +81,7 @@ video {
 }
 
 .control-handles svg{
-	scale: 1.25;
+	scale: 1.125;
 }
 
 .player-wrapper:hover .controls-container {
