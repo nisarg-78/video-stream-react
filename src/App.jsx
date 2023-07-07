@@ -5,13 +5,12 @@ import Player from "./components/Player"
 import Live from "./components/Live"
 
 function App() {
-	const src = "https://video-stream-7f9u.onrender.com/videos/"
 
 	return (
 		<Routes>
 			<Route path='/' element={<Home />} />
-			<Route path='/live' element={<Live/>} />
-			<Route path='/:id' element={<Player src={src} />} />
+			<Route path='/live' element={<Live />} />
+			<Route path='/:id' element={<Player />} />
 		</Routes>
 	)
 }

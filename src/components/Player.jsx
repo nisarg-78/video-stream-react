@@ -1,4 +1,5 @@
 import styles from "./Player.module.css"
+import { ENDPOINT } from "../urls"
 import VideoThumbnail from "./VideoThumbnail"
 import React, { useState, useRef, useEffect } from "react"
 import { useParams } from "react-router-dom"
@@ -12,10 +13,10 @@ import {
 	BsFullscreenExit,
 } from "react-icons/bs"
 
-export default function Player({ src }) {
+export default function Player() {
 	const { id } = useParams()
-	src = 'https://video-stream-7f9u.onrender.com/videos/id/'+id
-	
+	const src = ENDPOINT + "/videos/id/" + id
+
 	const player = useRef(null)
 	const videoWrapper = useRef(null)
 	const volumeSlider = useRef(null)
@@ -266,8 +267,29 @@ export default function Player({ src }) {
 								</button>
 							</div>
 
+							{/* video time */}
+							{player?.current?.getCurrentTime() && (
+								<div className={styles["video-time"]}>
+									{new Date(
+										Number(
+											Number(
+												player.current.getCurrentTime()
+											).toFixed(0)
+										) * 1000
+									)
+										.toISOString()
+										.substring(14, 19)}
+									/
+									{new Date(
+										player.current.getDuration() * 1000
+									)
+										.toISOString()
+										.substring(14, 19)}
+								</div>
+							)}
+
 							{/* mute/unmute handle */}
-							<div>
+							<div className={styles["volume"]}>
 								<button
 									onClick={() => {
 										setMuted((muted) => !muted)

@@ -4,13 +4,10 @@ import { Link } from "react-router-dom"
 
 const VideoThumbnail = ({ img, title, id }) => {
 
-	const path = `/${id}`
-	console.log(path)
-
 	return (
 		<div className={styles.video}>
 			<div className={styles.thumbnail}>
-			<Link to={path}>
+			<Link to={`/${id}`}>
 				<img src={img} alt='' />
 			</Link>
 			</div>

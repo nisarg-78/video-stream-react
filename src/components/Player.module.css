@@ -75,12 +75,25 @@ video {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	opacity: 0;
+	/* opacity: 0; */
 	transition: opacity 0.3s;
+	font-size: 1.1em;
+}
+
+.control-handles svg{
+	scale: 1.25;
 }
 
 .player-wrapper:hover .controls-container {
 	opacity: 1;
+}
+
+.video-time{
+	display: flex;
+	align-items: center;
+	font-size: 0.9em;
+	font-weight: 100;
+	padding: 0em 0.5em;
 }
 
 .video-consumed,
@@ -116,6 +129,7 @@ video {
 }
 
 .control-handles {
+	padding: 0.125em 0.125em ;
 	display: flex;
 	background-color: rgba(36, 36, 36, 0.95);
 }
@@ -132,8 +146,29 @@ video {
 	margin: 0;
 	font-size: 1.5rem;
 	color: #fff;
+	line-height: 100%;
+}
+
+.control-handles button:focus {
+	outline: 2px solid #fff;
 }
 
 .resolution-selector {
 	margin-left: auto;
+}
+
+.volume *{
+	display: flex;
+	padding: 0;
+	margin: 0;
+}
+
+.volume input{
+	opacity: 0;
+	transition: opacity 0.15s;
+}
+
+.volume button:hover ~ input,
+.volume input:hover{
+	opacity: 1;
 }
