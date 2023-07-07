@@ -9,9 +9,9 @@ import {
 	BsFillPlayFill,
 	BsVolumeUpFill,
 	BsVolumeMuteFill,
-	BsFullscreen,
-	BsFullscreenExit,
 } from "react-icons/bs"
+
+import {AiOutlineFullscreen, AiOutlineFullscreenExit} from "react-icons/ai"
 
 export default function Player() {
 	const { id } = useParams()
@@ -178,6 +178,12 @@ export default function Player() {
 		)
 	}
 
+	function handleMouseLeave() {
+		clearTimeout(showControlsTimeout)
+		document.body.style.cursor = "auto"
+		playerControls.current.style.opacity = 0
+	}
+
 	function handleQuality(event) {
 		console.log(event.target.value)
 
@@ -207,8 +213,8 @@ export default function Player() {
 					className={styles["player-wrapper"]}
 					ref={videoWrapper}
 					onDoubleClick={handleFullscreen}
-					// onMouseMove={handleMouseMove}
-				>
+					onMouseMove={handleMouseMove}
+					onMouseOut={handleMouseLeave}>
 					<ReactPlayer
 						ref={player}
 						className={styles["react-player"]}
@@ -332,9 +338,9 @@ export default function Player() {
 							<div className={styles.fullscreen}>
 								<button onClick={handleFullscreen}>
 									{isFullscreen ? (
-										<BsFullscreenExit />
+										<AiOutlineFullscreenExit />
 									) : (
-										<BsFullscreen />
+										<AiOutlineFullscreen />
 									)}
 								</button>
 							</div>
