@@ -13,7 +13,7 @@
 	all: unset;
 }
 
-.go-live h1{
+.logo h1 {
 	color: #d5f2ff;
 }
 
@@ -70,23 +70,73 @@
 	color: black;
 }
 
-.movies{
+.movies {
 	display: flex;
 	flex-direction: column;
 }
 
-a{
+a {
 	all: unset;
 }
 
-.movie{
-	border: 1px solid gray;
+.movie {
+	margin-bottom: 2px;
 	padding: 5px;
-	background-color: white;
-	color: rgb(48, 48, 48);
+	background-color: #535c66;
+	color: whitesmoke;
 	cursor: pointer;
 }
 
-.movie:hover{
+.movie:hover {
 	background-color: lightgray;
+	color: black;
+}
+
+*::-webkit-scrollbar {
+	width: 0.25em;
+}
+
+*::-webkit-scrollbar:hover {
+	cursor: pointer;
+}
+
+*::-webkit-scrollbar-track {
+	background-color: rgb(100, 100, 100);
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #ececec;
+}
+
+@media screen and (max-width: 768px) {
+	.left-bar {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: auto;
+		padding: 0;
+		overflow: visible;
+	}
+	.left-bar .logo {
+		width: 100%;
+		text-align: center;
+	}
+	.left-bar .tags {
+		display: flex;
+		flex-direction: row;
+	}
+	.categories {
+		display: flex;
+		align-items: center;
+		margin: 0 0 0 10px;
+	}
+	.tags {
+		margin: 0 0 0 10px;
+		display: flex;
+		align-items: center;
+		overflow-x: scroll;
+	}
+	.tag {
+		margin: 0 5px 0 0;
+	}
 }

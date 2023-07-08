@@ -30,7 +30,9 @@ export default function Feed() {
 				<div className={styles.error}>
 					No Videos Found, reasons could be:
 					<ul>
-						<li>The server is sleeping, please wait a minute or two.</li>
+						<li>
+							The server is sleeping, please wait a minute or two.
+						</li>
 						<li>There are no videos with provided tags.</li>
 					</ul>
 				</div>

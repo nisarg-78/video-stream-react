@@ -96,7 +96,6 @@ export default function Player() {
 	}
 
 	function handleFullscreen() {
-		console.log(videoWrapper)
 		if (!isFullscreen) {
 			videoWrapper.current.requestFullscreen().then(
 				(result) => {
@@ -160,6 +159,16 @@ export default function Player() {
 
 	const throttledHandleVolume = throttle(handleVolume, 200)
 
+	// show controls when video is paused and hide when video is playing
+	function handlePausePause() {
+		if (window.innerWidth > 768) return
+		if (playing) {
+			playerControls.current.style.opacity = 0
+		} else {
+			playerControls.current.style.opacity = 1
+		}
+	}
+
 	function handleVolume(event) {
 		const inputValue = event.target.value || event
 		const precentVolume = inputValue / maxVolume
@@ -167,12 +176,15 @@ export default function Player() {
 		if (volume === 0) setMuted(true)
 		else setMuted(false)
 		localStorage.setItem("precentVolume", precentVolume)
+		if (showControlsTimeout) clearTimeout(showControlsTimeout)
 	}
 
 	function handleMouseMove() {
+		if (window.innerWidth < 768) return
 		document.body.style.cursor = "auto"
 		if (showControlsTimeout) clearTimeout(showControlsTimeout)
 		playerControls.current.style.opacity = 1
+
 		setShowControlsTimeout(
 			setTimeout(() => {
 				playerControls.current.style.opacity = 0
@@ -182,6 +194,8 @@ export default function Player() {
 	}
 
 	function handleMouseLeave() {
+		if (window.innerWidth < 768) return
+		if (!playerControls.current) return
 		clearTimeout(showControlsTimeout)
 		document.body.style.cursor = "auto"
 		playerControls.current.style.opacity = 0
@@ -253,8 +267,14 @@ export default function Player() {
 						progressInterval={0}
 						onClick={() => setPlaying((playing) => !playing)}
 						playing={playing}
-						onPlay={() => setPlaying(true)}
-						onPause={() => setPlaying(false)}
+						onPlay={() => {
+							setPlaying(true)
+							handlePausePause()
+						}}
+						onPause={() => {
+							setPlaying(false)
+							handlePausePause()
+						}}
 						onProgress={handleProgress}
 					/>
 					<div
@@ -295,12 +315,12 @@ export default function Player() {
 							</div>
 
 							{/* video time */}
-							{player?.current?.getCurrentTime() && (
+							{player?.current?.getCurrentTime() !== 0 && (
 								<div className={styles["video-time"]}>
 									{formatTime(
 										player?.current?.getCurrentTime()
-									)}{" "}
-									/{" "}
+									)}
+									/
 									{formatTime(player?.current?.getDuration())}
 								</div>
 							)}
@@ -372,6 +392,21 @@ export default function Player() {
 					</div>
 				</div>
 
+				{/* video title and description */}
+				<div className={styles.info}>
+					<div className={styles.name}>
+						<div>
+							{location?.state?.title
+								? location?.state?.title
+								: videoJson?.title}
+						</div>
+						<div className={styles.date}>
+							{videoJson?.date &&
+								new Date(videoJson?.date).toDateString()}
+						</div>
+					</div>
+				</div>
+
 				{/* suggestions */}
 				<div className={styles.suggestions}>
 					<span>Similar Videos</span>
@@ -394,21 +429,6 @@ export default function Player() {
 										</div>
 									)
 							)}
-					</div>
-				</div>
-
-				{/* video title and description */}
-				<div className={styles.info}>
-					<div className={styles.name}>
-						<div>
-							{location?.state?.title
-								? location?.state?.title
-								: videoJson?.title}
-						</div>
-						<div className={styles.date}>
-							{videoJson?.date &&
-								new Date(videoJson?.date).toDateString()}
-						</div>
 					</div>
 				</div>
 			</div>

@@ -23,7 +23,7 @@ export default function Feed() {
 
 	return (
 		<div className='left-bar'>
-			<div className='go-live'>
+			<div className='logo'>
 				<h1>Stream.ts</h1>
 				<hr />
 			</div>
@@ -74,7 +74,7 @@ export default function Feed() {
 						<label htmlFor='Science'>Science</label>
 					</div>
 				</div>
-				<hr />
+				{/* <hr />
 				<h3>
 					<label htmlFor='tags'>Movies</label>
 				</h3>
@@ -90,7 +90,7 @@ export default function Feed() {
 							</Link>
 						))}
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)

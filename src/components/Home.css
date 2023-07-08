@@ -12,3 +12,11 @@ body{
 .feed{
     flex-grow: 1;
 }
+
+
+@media screen and (max-width: 768px) {
+    .home-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
