@@ -7,9 +7,7 @@ import Feed from "./Feed"
 import LeftBar from "./LeftBar"
 
 export default function Home() {
-
-
-    const [tags, setTags] = useState([])
+	const [tags, setTags] = useState([])
 
 	const updateTags = (e) => {
 		const isChecked = e.target.checked
@@ -22,9 +20,8 @@ export default function Home() {
 		}
 	}
 
-
 	return (
-		<FeedContext.Provider value={{tags, updateTags}}>
+		<FeedContext.Provider value={{ tags, updateTags }}>
 			<div className='home-container'>
 				<LeftBar className='left-bar' />
 				<Feed className='feed' />

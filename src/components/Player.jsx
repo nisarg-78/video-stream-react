@@ -179,27 +179,29 @@ export default function Player() {
 		if (showControlsTimeout) clearTimeout(showControlsTimeout)
 	}
 
-	function handleMouseMove() {
-		if (window.innerWidth < 768) return
-		document.body.style.cursor = "auto"
-		if (showControlsTimeout) clearTimeout(showControlsTimeout)
-		playerControls.current.style.opacity = 1
+	// function handleMouseMove() {
+	// 	if (window.innerWidth < 768) return
+	// 	document.body.style.cursor = "auto"
+	// 	if (showControlsTimeout) clearTimeout(showControlsTimeout)
+	// 	playerControls.current.style.opacity = 1
 
-		setShowControlsTimeout(
-			setTimeout(() => {
-				playerControls.current.style.opacity = 0
-				document.body.style.cursor = "none"
-			}, 3000)
-		)
-	}
+	// 	setShowControlsTimeout(
+	// 		setTimeout(() => {
+	// 			playerControls.current.style.opacity = 0
+	// 			document.body.style.cursor = "none"
+	// 		}, 3000)
+	// 	)
+	// }
 
-	function handleMouseLeave() {
-		if (window.innerWidth < 768) return
-		if (!playerControls.current) return
-		clearTimeout(showControlsTimeout)
-		document.body.style.cursor = "auto"
-		playerControls.current.style.opacity = 0
-	}
+	// function handleMouseLeave() {
+	// 	if (window.innerWidth < 768) return
+	// 	if (!playerControls.current) return
+	// 	clearTimeout(showControlsTimeout)
+	// 	document.body.style.cursor = "auto"
+	// 	playerControls.current.style.opacity = 0
+	// }
+
+	
 
 	function handleQuality(event) {
 		console.log(event.target.value)
@@ -248,8 +250,9 @@ export default function Player() {
 					className={styles["player-wrapper"]}
 					ref={videoWrapper}
 					onDoubleClick={handleFullscreen}
-					onMouseMove={handleMouseMove}
-					onMouseOut={handleMouseLeave}>
+					// onMouseMove={handleMouseMove}
+					// onMouseOut={handleMouseLeave}
+					>
 					<ReactPlayer
 						ref={player}
 						className={styles["react-player"]}

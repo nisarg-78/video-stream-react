@@ -23,10 +23,6 @@ export default function Feed() {
 
 	return (
 		<div className='left-bar'>
-			<div className='logo'>
-				<h1>Stream.ts</h1>
-				<hr />
-			</div>
 
 			<div className='categories'>
 				<h3>
@@ -74,23 +70,6 @@ export default function Feed() {
 						<label htmlFor='Science'>Science</label>
 					</div>
 				</div>
-				{/* <hr />
-				<h3>
-					<label htmlFor='tags'>Movies</label>
-				</h3>
-				<div>
-					<div className='movies'>
-						{movies?.map((movie) => (
-							<Link
-								to={`/${movie.title.replace(/\s/g, "-")}`}
-								state={{ title: movie.title, src: movie.link }}>
-								<div className='movie' key={movie.link}>
-									{movie.title}
-								</div>
-							</Link>
-						))}
-					</div>
-				</div> */}
 			</div>
 		</div>
 	)

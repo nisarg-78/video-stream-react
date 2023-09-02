@@ -6,7 +6,6 @@
 
 .parent {
 	height: 100%;
-	width: 100%;
 	display: grid;
 	grid-template-areas:
 		"player player suggestions"
@@ -61,6 +60,7 @@ video {
 
 .player-wrapper {
 	grid-area: player;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	position: relative;

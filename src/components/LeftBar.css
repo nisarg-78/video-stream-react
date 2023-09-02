@@ -4,40 +4,18 @@
 	border-right: 1px solid gray;
 	color: aliceblue;
 	font-family: "AbeeZee", sans-serif;
-	padding: 20px;
-	padding-top: 0px;
-	overflow-y: scroll;
+	font-size: 1.2em;
+	padding: 0 20px;
 }
 
 .go-live a {
 	all: unset;
 }
 
-.logo h1 {
-	color: #d5f2ff;
-}
-
-.go-live button {
-	all: unset;
-	display: inline-block;
-	width: 15ch;
-	text-align: center;
-	background-color: transparent;
-	padding: 5px 0;
-	color: white;
-	border: 1px solid white;
-	cursor: pointer;
-	transition: background-color 0.3s;
-}
-
-.go-live button:hover {
-	background-color: lightgray;
-	background-color: red;
-}
-
 .tags {
 	display: flex;
 	flex-direction: column;
+	scrollbar-width: none;
 }
 
 .tag {
@@ -79,35 +57,6 @@ a {
 	all: unset;
 }
 
-.movie {
-	margin-bottom: 2px;
-	padding: 5px;
-	background-color: #535c66;
-	color: whitesmoke;
-	cursor: pointer;
-}
-
-.movie:hover {
-	background-color: lightgray;
-	color: black;
-}
-
-*::-webkit-scrollbar {
-	width: 0.25em;
-}
-
-*::-webkit-scrollbar:hover {
-	cursor: pointer;
-}
-
-*::-webkit-scrollbar-track {
-	background-color: rgb(100, 100, 100);
-}
-
-*::-webkit-scrollbar-thumb {
-	background-color: #ececec;
-}
-
 @media screen and (max-width: 768px) {
 	.left-bar {
 		display: flex;
@@ -116,10 +65,6 @@ a {
 		height: auto;
 		padding: 0;
 		overflow: visible;
-	}
-	.left-bar .logo {
-		width: 100%;
-		text-align: center;
 	}
 	.left-bar .tags {
 		display: flex;
