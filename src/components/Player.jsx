@@ -19,7 +19,8 @@ export default function Player() {
 
 	const src = location?.state?.src
 		? location?.state?.src
-		: ENDPOINT + "/videos/id/" + id
+		//TODO replace params with query params
+		: `${ENDPOINT}/videos/id/${id}`
 
 	const player = useRef(null)
 	const videoWrapper = useRef(null)

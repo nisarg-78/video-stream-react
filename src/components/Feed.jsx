@@ -46,14 +46,6 @@ export default function Feed() {
 							img={video.thumbnail}
 						/>
 					))}
-					{feedVideos.map((video, index) => (
-						<VideoThumbnail
-							key={video._id}
-							id={video.id}
-							title={video.title}
-							img={video.thumbnail}
-						/>
-					))}
 				</div>
 			)}
 		</>

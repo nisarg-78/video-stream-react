@@ -8,7 +8,7 @@ export default function Navbar() {
 				<Link to='/'>Stream.ts</Link>
 			</div>
 			<div className='search'>
-				<input type='text' placeholder='Search (not working)' />
+				<input type='text' placeholder='' />
 			</div>
 			<div className='profile'>
 				<p>Logged in as Username</p>
