@@ -1,6 +1,5 @@
 import "./LeftBar.css"
 import { ENDPOINT } from "../urls"
-import { moviesList } from "../urls"
 import { useEffect, useState, useContext } from "react"
 
 import { FeedContext } from "../contexts/FeedContext"

@@ -7,12 +7,12 @@ export default function Navbar() {
 			<div className='logo'>
 				<Link to='/'>Stream.ts</Link>
 			</div>
-			<div className='search'>
+			{/* <div className='search'>
 				<input type='text' placeholder='' />
 			</div>
 			<div className='profile'>
 				<p>Logged in as Username</p>
-			</div>
+			</div> */}
 		</div>
 	)
 }

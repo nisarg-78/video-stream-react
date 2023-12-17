@@ -6,7 +6,8 @@ body{
 }
 .home-container{
     display: flex;
-    overflow: scroll;
+    overflow: hidden;
+    height: 100vh;
 }
 
 .feed{

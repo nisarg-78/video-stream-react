@@ -17,10 +17,7 @@ export default function Player() {
 	const { id } = useParams()
 	const location = useLocation()
 
-	const src = location?.state?.src
-		? location?.state?.src
-		//TODO replace params with query params
-		: `${ENDPOINT}/videos/id/${id}`
+	const src =	location?.state?.src ? location?.state?.src : `${ENDPOINT}/videos/m3u8?id=${id}`
 
 	const player = useRef(null)
 	const videoWrapper = useRef(null)
@@ -47,7 +44,24 @@ export default function Player() {
 		// fetch video data and similar videos
 		const fetchData = async () => {
 			try {
-				const response = await fetch(`${ENDPOINT}/videos/info/${id}`)
+				// set 5min interval to refresh cookie
+				let cookies = await fetch(`${ENDPOINT}/videos/cookie`, {
+					method: "GET",
+					credentials: "include",
+				})
+				// cookies = await cookies.json()
+				// for (const [key, value] of Object.entries(cookies)) {
+				// 	document.cookie = `${key}=${value}; domain=dmvi28l2cqgt0.cloudfront.net/`;
+				// }
+
+				// const interval = setInterval(async () => {
+				// 	await fetch(`${ENDPOINT}/videos/cookie`, {
+				// 		method: "GET",
+				// 		credentials: "include",
+				// 	})
+				// }, 300000)
+
+				const response = await fetch(`${ENDPOINT}/videos/info?id=${id}`)
 				const data = await response.json()
 
 				if (data[0]) {
@@ -202,8 +216,6 @@ export default function Player() {
 	// 	playerControls.current.style.opacity = 0
 	// }
 
-	
-
 	function handleQuality(event) {
 		console.log(event.target.value)
 
@@ -253,14 +265,14 @@ export default function Player() {
 					onDoubleClick={handleFullscreen}
 					// onMouseMove={handleMouseMove}
 					// onMouseOut={handleMouseLeave}
-					>
+				>
 					<ReactPlayer
 						ref={player}
 						className={styles["react-player"]}
 						url={src}
 						config={{
-							file: {
-								forceHLS: true,
+							xhrSetup: function (xhr, url) {
+								xhr.withCredentials = true // do send cookies
 							},
 						}}
 						onReady={onPlayerReady}
