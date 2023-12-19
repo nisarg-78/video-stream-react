@@ -1,5 +1,5 @@
 import styles from "./Player.module.css"
-import { ENDPOINT } from "../urls"
+import { ENDPOINT, CDN } from "../urls"
 import VideoThumbnail from "./VideoThumbnail"
 import React, { useState, useRef, useEffect } from "react"
 import { useLocation } from "react-router-dom"
@@ -13,17 +13,18 @@ import {
 } from "react-icons/bs"
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai"
 
+import Cookies from "universal-cookie"
+
 export default function Player() {
 	const { id } = useParams()
 	const location = useLocation()
-
-	const src =	location?.state?.src ? location?.state?.src : `${ENDPOINT}/videos/m3u8?id=${id}`
 
 	const player = useRef(null)
 	const videoWrapper = useRef(null)
 	const volumeSlider = useRef(null)
 	const playerControls = useRef(null)
 
+	const [src, setSrc] = useState("")
 	const [caption, setCaption] = useState(false)
 	const [internalPlayer, setInternalPlayer] = useState(null)
 	const [videoJson, setVideoJson] = useState(null)
@@ -41,26 +42,17 @@ export default function Player() {
 	const [showControlsTimeout, setShowControlsTimeout] = useState(null)
 
 	useEffect(() => {
+		const source = location?.state?.src
+			? location?.state?.src
+			: `${CDN}/videos/${id}/master.m3u8`
+		setSrc(source)
+
 		// fetch video data and similar videos
 		const fetchData = async () => {
 			try {
-				// set 5min interval to refresh cookie
-				let cookies = await fetch(`${ENDPOINT}/videos/cookie`, {
-					method: "GET",
-					credentials: "include",
-				})
-				// cookies = await cookies.json()
-				// for (const [key, value] of Object.entries(cookies)) {
-				// 	document.cookie = `${key}=${value}; domain=dmvi28l2cqgt0.cloudfront.net/`;
-				// }
-
-				// const interval = setInterval(async () => {
-				// 	await fetch(`${ENDPOINT}/videos/cookie`, {
-				// 		method: "GET",
-				// 		credentials: "include",
-				// 	})
-				// }, 300000)
-
+				console.log("Here")
+				await fetch(`${ENDPOINT}/auth/cookie`)
+				console.log("Here2")
 				const response = await fetch(`${ENDPOINT}/videos/info?id=${id}`)
 				const data = await response.json()
 
@@ -194,28 +186,6 @@ export default function Player() {
 		if (showControlsTimeout) clearTimeout(showControlsTimeout)
 	}
 
-	// function handleMouseMove() {
-	// 	if (window.innerWidth < 768) return
-	// 	document.body.style.cursor = "auto"
-	// 	if (showControlsTimeout) clearTimeout(showControlsTimeout)
-	// 	playerControls.current.style.opacity = 1
-
-	// 	setShowControlsTimeout(
-	// 		setTimeout(() => {
-	// 			playerControls.current.style.opacity = 0
-	// 			document.body.style.cursor = "none"
-	// 		}, 3000)
-	// 	)
-	// }
-
-	// function handleMouseLeave() {
-	// 	if (window.innerWidth < 768) return
-	// 	if (!playerControls.current) return
-	// 	clearTimeout(showControlsTimeout)
-	// 	document.body.style.cursor = "auto"
-	// 	playerControls.current.style.opacity = 0
-	// }
-
 	function handleQuality(event) {
 		console.log(event.target.value)
 
@@ -271,8 +241,13 @@ export default function Player() {
 						className={styles["react-player"]}
 						url={src}
 						config={{
-							xhrSetup: function (xhr, url) {
-								xhr.withCredentials = true // do send cookies
+							file: {
+								forceHLS: true,
+								hlsOptions: {
+									xhrSetup: function (xhr, url) {
+										xhr.withCredentials = true // send cookies
+									},
+								},
 							},
 						}}
 						onReady={onPlayerReady}

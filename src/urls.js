@@ -4,6 +4,6 @@ const ENDPOINT = isDev
 	? "http://localhost:3000"
 	: "https://api.streamts.tech"
 
-console.log(ENDPOINT)
+const CDN = "https://cdn.streamts.tech"
 
-export { ENDPOINT }
+export { ENDPOINT, CDN }

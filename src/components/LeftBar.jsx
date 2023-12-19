@@ -1,24 +1,24 @@
 import "./LeftBar.css"
-import { ENDPOINT } from "../urls"
+// import { ENDPOINT } from "../urls"
 import { useEffect, useState, useContext } from "react"
 
 import { FeedContext } from "../contexts/FeedContext"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 
 export default function Feed() {
 	const { tags, updateTags } = useContext(FeedContext)
-	const [movies, setMovies] = useState()
+	// const [movies, setMovies] = useState()
 
-	useEffect(() => {
-		console.log(ENDPOINT + "/movies/all")
-		fetch(ENDPOINT + "/movies/all")
-			.then((res) => res.json())
-			.then((data) => {
-				setMovies(data)
-				console.log(data)
-			})
-			.catch((err) => console.log(err))
-	}, [])
+	// useEffect(() => {
+	// 	console.log(ENDPOINT + "/movies/all")
+	// 	fetch(ENDPOINT + "/movies/all")
+	// 		.then((res) => res.json())
+	// 		.then((data) => {
+	// 			setMovies(data)
+	// 			console.log(data)
+	// 		})
+	// 		.catch((err) => console.log(err))
+	// }, [])
 
 	return (
 		<div className='left-bar'>
