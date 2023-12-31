@@ -41,14 +41,6 @@ export default function Player() {
 	const [showControlsTimeout, setShowControlsTimeout] = useState(null)
 
 	useEffect(() => {
-		const authenticateUser = async () => {
-			// accept the cookie
-			const response = await fetch(`${ENDPOINT}/auth/cookie`, {
-				credentials: "include",
-			})
-		}
-		authenticateUser()
-
 		// fetch video data and similar videos
 		const fetchData = async () => {
 			try {

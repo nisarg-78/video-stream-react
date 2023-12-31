@@ -12,6 +12,14 @@ export default function Feed() {
 	const [feedVideos, setFeedVideos] = useState([])
 
 	useEffect(() => {
+		const authenticateUser = async () => {
+			// accept the cookie
+			const response = await fetch(`${ENDPOINT}/auth/cookie`, {
+				credentials: "include",
+			})
+		}
+		authenticateUser()
+		
 		fetch(`${ENDPOINT}/videos/all?tags=${tags ? tags : ""}`)
 			.then((res) => res.json())
 			.then((data) => {
