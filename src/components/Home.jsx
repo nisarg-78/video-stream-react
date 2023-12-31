@@ -7,14 +7,17 @@ import Feed from "./Feed"
 import LeftBar from "./LeftBar"
 import Navbar from "./Navbar"
 
+import { ENDPOINT } from "../urls"
+
 export default function Home() {
 	const [tags, setTags] = useState([])
 
-	useEffect(async () => {
+	useEffect(() => {
 		const authenticateUser = async () => {
+			console.log("authenticating user")
 			await fetch(`${ENDPOINT}/auth/cookie`)
 		}
-		await authenticateUser()
+		authenticateUser()
 	}, [])
 
 	const updateTags = (e) => {
