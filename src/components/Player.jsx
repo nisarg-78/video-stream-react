@@ -12,6 +12,7 @@ import {
 	BsVolumeMuteFill,
 } from "react-icons/bs"
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai"
+import Cookies from "universal-cookie"
 
 export default function Player() {
 	const { id } = useParams()
@@ -41,7 +42,10 @@ export default function Player() {
 
 	useEffect(() => {
 		const authenticateUser = async () => {
-			await fetch(`${ENDPOINT}/auth/cookie`)
+			// accept the cookie
+			const response = await fetch(`${ENDPOINT}/auth/cookie`, {
+				credentials: "include",
+			})
 		}
 		authenticateUser()
 
