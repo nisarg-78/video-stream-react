@@ -18,10 +18,6 @@ export default function Feed() {
 				console.log(data)
 				setFeedVideos(data)
 			})
-		console.log("Feed mounted")
-		return () => {
-			console.log("Feed unmounted")
-		}
 	}, [tags])
 
 	return (

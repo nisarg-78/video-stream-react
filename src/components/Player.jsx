@@ -40,6 +40,12 @@ export default function Player() {
 	const [showControlsTimeout, setShowControlsTimeout] = useState(null)
 
 	useEffect(() => {
+		const authenticateUser = async () => {
+			console.log("authenticating user")
+			await fetch(`${ENDPOINT}/auth/cookie`)
+		}
+		authenticateUser()
+
 		// fetch video data and similar videos
 		const fetchData = async () => {
 			try {
@@ -47,7 +53,7 @@ export default function Player() {
 					? location?.state?.src
 					: `${CDN}/videos/${id}/master.m3u8`
 				setSrc(source)
-				
+
 				const response = await fetch(`${ENDPOINT}/videos/info?id=${id}`)
 				const data = await response.json()
 				if (data[0]) {
