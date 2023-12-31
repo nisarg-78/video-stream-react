@@ -8,7 +8,7 @@ const VideoThumbnail = ({ img, title, id }) => {
 			<Link to={`/${id}`}>
 				<div className={styles.thumbnail}>
 					<img
-						src={"https://source.unsplash.com/random"}
+						src={img}
 						alt=''
 						className='thumbnail'
 					/>
