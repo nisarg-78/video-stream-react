@@ -13,8 +13,6 @@ import {
 } from "react-icons/bs"
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai"
 
-import Cookies from "universal-cookie"
-
 export default function Player() {
 	const { id } = useParams()
 	const location = useLocation()
@@ -42,20 +40,16 @@ export default function Player() {
 	const [showControlsTimeout, setShowControlsTimeout] = useState(null)
 
 	useEffect(() => {
-		const source = location?.state?.src
-			? location?.state?.src
-			: `${CDN}/videos/${id}/master.m3u8`
-		setSrc(source)
-
 		// fetch video data and similar videos
 		const fetchData = async () => {
 			try {
-				console.log("Here")
-				await fetch(`${ENDPOINT}/auth/cookie`)
-				console.log("Here2")
+				const source = location?.state?.src
+					? location?.state?.src
+					: `${CDN}/videos/${id}/master.m3u8`
+				setSrc(source)
+				
 				const response = await fetch(`${ENDPOINT}/videos/info?id=${id}`)
 				const data = await response.json()
-
 				if (data[0]) {
 					setVideoJson(data[0])
 
@@ -242,7 +236,6 @@ export default function Player() {
 						url={src}
 						config={{
 							file: {
-								forceHLS: true,
 								hlsOptions: {
 									xhrSetup: function (xhr, url) {
 										xhr.withCredentials = true // send cookies
