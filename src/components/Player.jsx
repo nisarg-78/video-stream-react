@@ -41,7 +41,6 @@ export default function Player() {
 
 	useEffect(() => {
 		const authenticateUser = async () => {
-			console.log("authenticating user")
 			await fetch(`${ENDPOINT}/auth/cookie`)
 		}
 		authenticateUser()

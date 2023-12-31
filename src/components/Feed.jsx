@@ -15,7 +15,6 @@ export default function Feed() {
 		fetch(`${ENDPOINT}/videos/all?tags=${tags ? tags : ""}`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data)
 				setFeedVideos(data)
 			})
 	}, [tags])

@@ -18,9 +18,9 @@ export default function Navbar() {
 			<div className='profile'>
 				<p>Logged in as Username</p>
 			</div> */}
-			<div className='cookie'>
+			{/* <div className='cookie'>
 				<button onClick={requestCookies}>Request Cookies</button>
-			</div>
+			</div> */}
 		</div>
 	)
 }

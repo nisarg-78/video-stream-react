@@ -7,18 +7,6 @@ import { FeedContext } from "../contexts/FeedContext"
 
 export default function Feed() {
 	const { tags, updateTags } = useContext(FeedContext)
-	// const [movies, setMovies] = useState()
-
-	// useEffect(() => {
-	// 	console.log(ENDPOINT + "/movies/all")
-	// 	fetch(ENDPOINT + "/movies/all")
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			setMovies(data)
-	// 			console.log(data)
-	// 		})
-	// 		.catch((err) => console.log(err))
-	// }, [])
 
 	return (
 		<div className='left-bar'>
