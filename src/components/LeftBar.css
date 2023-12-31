@@ -1,10 +1,8 @@
-
-
 .left-bar {
 	border-right: 1px solid gray;
 	color: aliceblue;
 	font-size: 1.2em;
-	padding: 0 20px;
+	background-color: #121215;
 }
 
 .go-live a {
@@ -15,6 +13,7 @@
 	display: flex;
 	flex-direction: column;
 	scrollbar-width: none;
+	padding: 10px;
 }
 
 .tag {
@@ -29,8 +28,7 @@
 
 .tag label {
 	display: inline-block;
-	padding: 5px;
-	background-color: transparent;
+	padding: 5px 10px;
 	color: white;
 	border: 1px solid gray;
 	cursor: pointer;
@@ -40,13 +38,13 @@
 }
 
 .tag input[type="checkbox"]:checked + label {
-	background-color: lightgray;
-	color: #000000;
+	background: rgba(103, 107, 241, 0.65);
+	color: white;
 }
 
 .tag label:hover {
-	background-color: lightgray;
-	color: black;
+	background-color: gradient;
+	background: rgba(103, 107, 241, 0.35);
 }
 
 .movies {
@@ -74,10 +72,8 @@ a {
 	.categories {
 		display: flex;
 		align-items: center;
-		margin: 0 0 0 10px;
 	}
 	.tags {
-		margin: 0 0 0 10px;
 		display: flex;
 		align-items: center;
 		overflow-x: scroll;

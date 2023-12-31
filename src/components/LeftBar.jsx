@@ -12,9 +12,6 @@ export default function Feed() {
 		<div className='left-bar'>
 
 			<div className='categories'>
-				<h3>
-					<label htmlFor='tags'>Tags</label>
-				</h3>
 				<div className='tags'>
 					<div className='tag'>
 						<input

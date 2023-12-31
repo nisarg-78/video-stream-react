@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import "./Navbar.css"
+import logo from "../assets/logo-no-background.png"
 
 export default function Navbar() {
 	async function requestCookies() {
@@ -10,7 +11,9 @@ export default function Navbar() {
 	return (
 		<div className='navbar'>
 			<div className='logo'>
-				<Link to='/'>Stream.ts</Link>
+				<Link to='/'>
+					<img src={logo} />
+				</Link>
 			</div>
 			{/* <div className='search'>
 				<input type='text' placeholder='' />

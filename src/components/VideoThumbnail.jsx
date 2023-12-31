@@ -8,7 +8,7 @@ const VideoThumbnail = ({ img, title, id }) => {
 		<div className={styles.video}>
 			<div className={styles.thumbnail}>
 			<Link to={`/${id}`}>
-				<img src={img} alt='' />
+				<img src={img} alt='' className="thumbnail" />
 			</Link>
 			</div>
 			<div className={styles.title}>{title}</div>

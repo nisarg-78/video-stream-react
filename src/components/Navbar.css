@@ -1,38 +1,34 @@
-.navbar{
+.navbar {
+	display: flex;
+	justify-content: space-around;
+	background-color: #121215;
+	border-bottom: 2px solid #535c66;
     display: flex;
-    justify-content: space-around;
-    border-bottom: 2px solid #535c66;
+    justify-content: flex-start;
 }
 
-.navbar div{
-    display: flex;
-    align-items: center; 
+.logo img{
+	height: 2em;
+	margin: 15px;
+	aspect-ratio: auto !important;
+}
+  
+.search input {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80%;
+	background-color: #535c66;
+	border: none;
+	outline: none;
+	color: white;
+	font-size: 20px;
+	padding: 0 10px;
 }
 
-.logo{
-    color: white;
-    font-size: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 0.5em;
-}
-
-.search input{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80%;
-    background-color: #535c66;
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 20px;
-    padding: 0 10px;
-}
-
-.profile{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+.profile {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
 }
