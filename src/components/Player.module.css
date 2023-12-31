@@ -39,10 +39,10 @@
 
 .suggestions {
 	grid-area: suggestions;
-	padding: 0%;
 	border-left: 2px solid #535c66;
 	display: flex;
 	flex-direction: column;
+	overflow-y: scroll;
 }
 
 .suggestions span {
@@ -50,6 +50,10 @@
 	padding: 10px;
 	text-align: center;
 	border-bottom: 2px solid #535c66;
+}
+
+.suggested-video{
+	padding: 10px;
 }
 
 video {
@@ -124,7 +128,7 @@ video {
 }
 
 .video-consumed {
-	background-color: #ef233c;
+	background-color: #5053be;
 	z-index: 1;
 }
 
@@ -186,7 +190,6 @@ video {
 	opacity: 1;
 }
 
-/* add media query for screen width less than 720p */
 @media screen and (max-width: 768px) {
 	.parent {
 		font-size: 1em;
