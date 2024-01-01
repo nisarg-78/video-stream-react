@@ -7,10 +7,10 @@
 
 .videos {
     width: 100%;
+    height: min-content;
     padding: 2em;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
     gap: 2em;
     overflow-y: scroll;
 }

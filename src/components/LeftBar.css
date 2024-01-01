@@ -30,7 +30,7 @@
 	border-radius: 10px;
 	display: inline-block;
 	padding: 5px 10px;
-	color: white;
+	color: whitesmoke;
 	border: 1px solid gray;
 	cursor: pointer;
 	transition: background-color 0.3s;
@@ -39,13 +39,13 @@
 }
 
 .tag input[type="checkbox"]:checked + label {
-	background: rgba(103, 107, 241, 0.5);
-	color: white;
+	background: whitesmoke;
+	color: black;
 }
 
 .tag label:hover {
 	background-color: gradient;
-	background: rgba(103, 107, 241, 0.35);
+	background: rgba(255, 255, 255, 0.25);
 }
 
 .movies {

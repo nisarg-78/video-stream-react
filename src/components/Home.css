@@ -10,10 +10,6 @@ body{
     height: 100vh;
 }
 
-.feed{
-    flex-grow: 1;
-}
-
 
 @media screen and (max-width: 768px) {
     .home-container {

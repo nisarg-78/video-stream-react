@@ -1,5 +1,5 @@
 import styles from "./VideoThumbnail.module.css"
-
+import { isDev } from "../urls"
 import { Link } from "react-router-dom"
 
 const VideoThumbnail = ({ img, title, id }) => {
@@ -8,15 +8,14 @@ const VideoThumbnail = ({ img, title, id }) => {
 			<Link to={`/${id}`}>
 				<div className={styles.thumbnail}>
 					<img
-						src={img}
+						src={isDev ? "https://source.unsplash.com/random" : img}
 						alt=''
-						className='thumbnail'
 					/>
 				</div>
 			</Link>
 			<div className={styles.title} title={title}>
-				{title.substring(0, 27)}
-				{title.length > 30 ? "..." : ""}
+				{title.substring(0, 278)}
+				{/* {title.length > 30 ? "..." : ""} */}
 			</div>
 		</div>
 	)

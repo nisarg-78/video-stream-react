@@ -1,5 +1,5 @@
 import styles from "./Feed.module.css"
-import { ENDPOINT } from "../urls"
+import { ENDPOINT, isDev } from "../urls"
 import { useEffect, useState, useContext } from "react"
 
 import { FeedContext } from "../contexts/FeedContext"

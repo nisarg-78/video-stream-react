@@ -1,5 +1,5 @@
 import styles from "./Player.module.css"
-import { ENDPOINT, CDN } from "../urls"
+import { ENDPOINT, CDN, isDev } from "../urls"
 import VideoThumbnail from "./VideoThumbnail"
 import React, { useState, useRef, useEffect } from "react"
 import { useLocation } from "react-router-dom"
@@ -12,7 +12,6 @@ import {
 	BsVolumeMuteFill,
 } from "react-icons/bs"
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai"
-import Cookies from "universal-cookie"
 
 export default function Player() {
 	const { id } = useParams()
@@ -48,6 +47,11 @@ export default function Player() {
 					? location?.state?.src
 					: `${CDN}/videos/${id}/master.m3u8`
 				setSrc(source)
+				if (isDev) {
+					setSrc(
+						"https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8"
+					)
+				}
 
 				const response = await fetch(`${ENDPOINT}/videos/info?id=${id}`)
 				const data = await response.json()
@@ -239,7 +243,9 @@ export default function Player() {
 							file: {
 								hlsOptions: {
 									xhrSetup: function (xhr, url) {
-										xhr.withCredentials = true // send cookies
+										xhr.withCredentials = isDev
+											? false
+											: true // send cookies
 									},
 								},
 							},
@@ -349,7 +355,9 @@ export default function Player() {
 												Mbps)
 											</option>
 										))}
-										<option value='auto'>Auto</option>
+										<option value='auto'>
+											Auto{" "}
+										</option>
 									</select>
 								</div>
 								{/* caption button */}
@@ -394,7 +402,6 @@ export default function Player() {
 
 				{/* suggestions */}
 				<div className={styles.suggestions}>
-					<span>Similar Videos</span>
 					<div className={styles["suggestions-list"]}>
 						{similarVideos &&
 							similarVideos.map(

@@ -1,7 +1,6 @@
 .video {
 	display: flex;
 	flex-direction: column;
-	position: relative;
 	cursor: pointer;
 	filter: drop-shadow(5px 5px 10px #19191f);
 }
@@ -9,6 +8,7 @@
 .thumbnail {
 	width: 100%;
 	height: 100%;
+	border-radius: 10px;
 	gap: 1em;
 	overflow: hidden;
 }
@@ -19,46 +19,26 @@
 	display: block;
 	aspect-ratio: 16 / 9;
 	object-fit: cover;
-	transition: scale 0.2s ease-in-out;
-	border-radius: 10px;
-}
-
-.thumbnail:after {
-	border-radius: 10px;
-	content: "";
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background: linear-gradient(
-		to bottom,
-		rgba(255, 255, 255, 0) 0%,
-		rgb(0, 0, 0) 100%
-	);
-	height: 50%;
-}
-
-.title {
-	position: absolute;
-	bottom: 0;
-	color: aliceblue;
-	font-size: 1.2em;
-	padding: 10px;
 	transition: all 0.2s ease-in-out;
 }
 
-.video:hover .title {
-	font-size: 1.5em;
+.title {
+	bottom: 0;
+	color: aliceblue;
+	font-size: 1.2em;
+	font-weight: 500;
+	padding: 10px 5px;
+}
+
+.video:hover .thumbnail img {
+	transform: scale(1.05);
 }
 
 @media screen and (max-width: 768px) {
 	.thumbnail img {
 		border-radius: 0px;
 	}
-    .thumbnail:after{
-        border-radius: 0px;
-    }
-    .video{
-        border-bottom: 5px solid #000;
-    }
+	.thumbnail:after {
+		border-radius: 0px;
+	}
 }

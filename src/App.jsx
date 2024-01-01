@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar"
 function App() {
 	return (
 		<div className='app-container'>
-			{/* <Navbar className='navbar' /> */}
+			<Navbar className='navbar' />
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/:id' element={<Player />} />

@@ -6,4 +6,4 @@ const ENDPOINT = isDev
 
 const CDN = "https://cdn.streamts.tech"
 
-export { ENDPOINT, CDN }
+export { ENDPOINT, CDN, isDev }
