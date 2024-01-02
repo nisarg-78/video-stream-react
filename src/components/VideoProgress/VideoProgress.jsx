@@ -3,7 +3,9 @@ import styles from "./VideoProgress.module.css"
 
 function VideoProgress({ consumed, buffered, handleSeek }) {
 	return (
-		<div className={styles["video-progress"]}>
+		<div className={styles["video-progress"]} onClick={(e) => {
+			e.stopPropagation()
+		}}>
 			<div
 				className={styles["video-bar"]}
 				onClick={handleSeek}

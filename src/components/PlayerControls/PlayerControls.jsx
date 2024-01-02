@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react"
 import styles from "./PlayerControls.module.css"
-import { PlayerContext } from "../contexts/PlayerContext"
+import { PlayerContext } from "../../contexts/PlayerContext"
 import {
 	BsFillPauseFill,
 	BsFillPlayFill,
@@ -78,9 +78,7 @@ function PlayerControls({
 	function handleVolume(event) {
 		const inputValue = event.target.value || event
 		const volume = inputValue / maxVolume
-		updatePlayerState({ percentVolume: volume })
-		if (volume === 0) updatePlayerState({ muted: true })
-		else updatePlayerState({ muted: false })
+		updatePlayerState({ percentVolume: volume, muted: volume === 0 })
 		localStorage.setItem("percentVolume", volume)
 	}
 
@@ -88,18 +86,19 @@ function PlayerControls({
 		if (event.target.value === "auto") {
 			internalPlayer.currentLevel = -1
 			updatePlayerState({
-				resolutionHeight: "auto"
+				resolutionHeight: "auto",
 			})
 		} else {
 			let [height, bitrate] = event.target.value.split(",")
 			height = parseInt(height)
 			bitrate = parseInt(bitrate)
-			
+
 			internalPlayer.levels.forEach((level, levelIndex) => {
 				if (level.height === height && level.bitrate === bitrate) {
 					internalPlayer.currentLevel = levelIndex
 					updatePlayerState({
-						resolutionHeight: internalPlayer.levels[levelIndex].height,
+						resolutionHeight:
+							internalPlayer.levels[levelIndex].height,
 					})
 				}
 			})
@@ -108,7 +107,11 @@ function PlayerControls({
 
 	return (
 		<>
-			<div className={styles["control-handles"]}>
+			<div
+				className={styles["control-handles"]}
+				onClick={(event) => {
+					event.stopPropagation()
+				}}>
 				{/* play/pause handle */}
 				<div>
 					<button

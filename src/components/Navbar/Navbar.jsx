@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import "./Navbar.css"
-import logo from "../assets/logo-no-background.png"
+import logo from "../../assets/logo-no-background.png"
 
 export default function Navbar() {
 	async function requestCookies() {

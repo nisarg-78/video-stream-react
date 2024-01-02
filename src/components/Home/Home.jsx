@@ -1,10 +1,10 @@
 import "./Home.css"
 
 import React, { useState } from "react"
-import { FeedContext } from "../contexts/FeedContext"
+import { FeedContext } from "../../contexts/FeedContext"
 
-import Feed from "./Feed"
-import LeftBar from "./LeftBar"
+import Feed from "../Feed/Feed"
+import LeftBar from "../LeftBar/LeftBar"
 
 export default function Home() {
 	const [tags, setTags] = useState([])

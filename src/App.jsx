@@ -1,15 +1,15 @@
 import "./App.css"
 import { Routes, Route } from "react-router-dom"
-import Home from "./components/Home"
-import Player from "./components/Player"
-import Navbar from "./components/Navbar"
+import Home from "./components/Home/Home"
+import Player from "./components/Player/Player"
+import VideoPage from "./components/VideoPage/VideoPage"
+import Navbar from "./components/Navbar/Navbar"
 import { useState } from "react"
 import { PlayerContext } from "./contexts/PlayerContext"
 
 function App() {
 	const [playerState, setPlayerState] = useState({})
 	const updatePlayerState = (obj) => {
-		console.log(obj)
 		setPlayerState((prevState) => ({ ...prevState, ...obj }))
 	}
 
@@ -19,7 +19,7 @@ function App() {
 				<Navbar className='navbar' />
 				<Routes>
 					<Route path='/' element={<Home />} />
-					<Route path='/:id' element={<Player />} />
+					<Route path='/:id' element={<VideoPage />} />
 				</Routes>
 			</PlayerContext.Provider>
 		</div>

@@ -1,10 +1,11 @@
 import styles from "./Feed.module.css"
-import { ENDPOINT, isDev } from "../urls"
+import { ENDPOINT, isDev } from "../../urls"
 import { useEffect, useState, useContext } from "react"
 
-import { FeedContext } from "../contexts/FeedContext"
+import { FeedContext } from "../../contexts/FeedContext"
 
-import VideoThumbnail from "./VideoThumbnail"
+import VideoThumbnail from "../VideoThumbnail/VideoThumbnail"
+import Player from "../Player/Player"
 
 export default function Feed() {
 	const { tags } = useContext(FeedContext)
@@ -19,7 +20,7 @@ export default function Feed() {
 			})
 		}
 		authenticateUser()
-		
+
 		fetch(`${ENDPOINT}/videos/all?tags=${tags ? tags : ""}`)
 			.then((res) => res.json())
 			.then((data) => {

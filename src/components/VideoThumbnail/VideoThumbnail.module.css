@@ -3,27 +3,25 @@
 	flex-direction: column;
 	cursor: pointer;
 	filter: drop-shadow(5px 5px 10px #19191f);
+	position: relative;
 }
 
 .thumbnail {
 	width: 100%;
 	height: 100%;
-	border-radius: 10px;
 	gap: 1em;
 	overflow: hidden;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
 }
 
 .thumbnail img {
+	border-radius: 10px;
 	width: 100%;
 	height: 100%;
-	display: block;
-	aspect-ratio: 16 / 9;
-	object-fit: cover;
-	transition: all 0.2s ease-in-out;
 }
 
 .title {
-	bottom: 0;
 	color: aliceblue;
 	font-size: 1.2em;
 	font-weight: 500;
@@ -35,10 +33,7 @@
 }
 
 @media screen and (max-width: 768px) {
-	.thumbnail img {
-		border-radius: 0px;
-	}
-	.thumbnail:after {
+	.thumbnail {
 		border-radius: 0px;
 	}
 }

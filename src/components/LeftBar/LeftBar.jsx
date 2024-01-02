@@ -1,6 +1,6 @@
 import "./LeftBar.css"
 import { useContext } from "react"
-import { FeedContext } from "../contexts/FeedContext"
+import { FeedContext } from "../../contexts/FeedContext"
 
 export default function Feed() {
 	const { tags, updateTags } = useContext(FeedContext)
