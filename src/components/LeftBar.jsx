@@ -1,9 +1,6 @@
 import "./LeftBar.css"
-// import { ENDPOINT } from "../urls"
-import { useEffect, useState, useContext } from "react"
-
+import { useContext } from "react"
 import { FeedContext } from "../contexts/FeedContext"
-// import { Link } from "react-router-dom"
 
 export default function Feed() {
 	const { tags, updateTags } = useContext(FeedContext)
