@@ -42,7 +42,7 @@ export default function Player({ videoId, isThumbnail }) {
 				} else {
 					const source = location?.state?.src
 						? location?.state?.src
-						: `${CDN}/videos/${id}/master.m3u8`
+						: `${CDN}/videos/${videoId}/master.m3u8`
 					setSrc(source)
 				}
 			} catch (err) {
