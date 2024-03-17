@@ -60,7 +60,7 @@ export default function Navbar() {
 
 function SearchResultItem({ video }) {
   return (
-    <Link to={video._id} onClick={() => setSearchTerm("")}>
+    <Link to={video.id} onClick={() => setSearchTerm("")}>
       <div className="search-result-item">
         <img src={video.thumbnail} />
         <p>{video.title}</p>
