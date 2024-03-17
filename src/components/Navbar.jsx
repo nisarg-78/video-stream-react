@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ENDPOINT } from "../urls";
 import "./Navbar.css";
 import logo from "../assets/logo-no-background.png";
 import { useState } from "react";
@@ -17,7 +18,7 @@ export default function Navbar() {
 
   const debounceSearch = useDebouncedCallback(async (value) => {
     setSearching(true);
-    const res = await fetch("http://localhost:3000/videos/search?s=" + value);
+    const res = await fetch(`${ENDPOINT}/videos/search?s=${value}`);
     const data = await res.json();
     setSearchResult(data);
     console.log(data);
