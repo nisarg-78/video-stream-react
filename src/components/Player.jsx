@@ -247,9 +247,9 @@ export default function Player() {
 											? false
 											: true // send cookies
 									},
+									maxMaxBufferLength: 15,
 								},
 							},
-							bufferConfig: { bufferAhead: 5 },
 						}}
 						onReady={onPlayerReady}
 						height={"100%"}
