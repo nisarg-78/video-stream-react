@@ -249,6 +249,7 @@ export default function Player() {
 									},
 								},
 							},
+							bufferConfig: { bufferAhead: 5 },
 						}}
 						onReady={onPlayerReady}
 						height={"100%"}
@@ -355,9 +356,7 @@ export default function Player() {
 												Mbps)
 											</option>
 										))}
-										<option value='auto'>
-											Auto{" "}
-										</option>
+										<option value='auto'>Auto </option>
 									</select>
 								</div>
 								{/* caption button */}

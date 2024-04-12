@@ -39,12 +39,13 @@ export default function Navbar() {
             type="search"
             onChange={handleSearchInput}
             value={searchTerm}
+            id="search"
             placeholder="Search"
           />
           {searchTerm && (
             <div className="search-result">
               {searching
-                ? "Loading..."
+                ? <span>Loading...</span>
                 : searchResult.map((item, i) => (
                     <SearchResultItem key={i} video={item} />
                   ))}

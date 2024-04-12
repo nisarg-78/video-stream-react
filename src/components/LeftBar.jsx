@@ -3,13 +3,16 @@ import "./LeftBar.css"
 import { useEffect, useState, useContext } from "react"
 
 import { FeedContext } from "../contexts/FeedContext"
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function Feed() {
 	const { tags, updateTags } = useContext(FeedContext)
 
 	return (
 		<div className='left-bar'>
+			<Link to={`/upload`}>
+				<button id='upload'>UPLOAD</button>
+			</Link>
 
 			<div className='categories'>
 				<div className='tags'>

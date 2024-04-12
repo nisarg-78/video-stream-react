@@ -73,6 +73,10 @@ nav ul .search input{
     border-radius: 5px;
 }
 
+.search-result span {
+    text-align: center;
+}
+
 .search-result{
     position: absolute;
     width: 400px;

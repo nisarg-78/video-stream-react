@@ -3,17 +3,29 @@
 	color: aliceblue;
 	font-size: 1.2em;
 	background-color: #121215;
+	padding: 10px;
 }
 
 .go-live a {
 	all: unset;
 }
 
+#upload{
+	border-radius: 10px;
+	display: inline-block;
+	padding: 5px 10px;
+	border: 1px solid gray;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	width: 100%;
+	text-align: center;
+}
+
 .tags {
 	display: flex;
 	flex-direction: column;
 	scrollbar-width: none;
-	padding: 10px;
+	padding-top: 10px;
 }
 
 .tag {
