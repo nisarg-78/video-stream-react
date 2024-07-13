@@ -10,6 +10,7 @@ import {
 	BsFillPlayFill,
 	BsVolumeUpFill,
 	BsVolumeMuteFill,
+	BsShareFill
 } from "react-icons/bs"
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai"
 
@@ -85,7 +86,17 @@ export default function Player() {
 		volumeSlider.current.value = precentVolume * 100
 	}, [id])
 
-	function onPlayerReady() {
+  const [notificationVisible, setNotificationVisible] = useState(false);
+
+  const copyVidLink = () => {
+		navigator.clipboard.writeText(window.location.href)
+		setNotificationVisible(true)
+		setTimeout(() => {
+			setNotificationVisible(false)
+		}, 2000)
+  }
+
+  function onPlayerReady() {
 		// start playing the video
 		setPlaying(true)
 
@@ -99,7 +110,7 @@ export default function Player() {
 			resolutions = [...resolutions, [level.height, level.bitrate]]
 		})
 		setResolutions(resolutions)
-	}
+  }
 
 	function handleFullscreen() {
 		if (!isFullscreen) {
@@ -392,6 +403,25 @@ export default function Player() {
 								? location?.state?.title
 								: videoJson?.title}
 						</div>
+						<div className={styles.tags}>
+							{videoJson?.tags &&
+								videoJson?.tags.map((tag, index) => (
+									<span className={styles.tag} key={index}>
+										{tag}
+									</span>
+								))}
+						</div>
+						<div className={styles.share} onClick={copyVidLink}>
+							<div
+								className={`${styles.copyMsg} ${
+									notificationVisible ? styles.show : ""
+								}`}>
+								Link copied!
+							</div>
+							<BsShareFill />
+						</div>
+					</div>
+					<div className='description'>
 						<div className={styles.date}>
 							{videoJson?.date &&
 								new Date(videoJson?.date).toDateString()}

@@ -143,6 +143,9 @@ nav ul .search input{
         z-index: 1;
         padding: 9px 10px 9px 0;
     }
+    pre {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 405px) {
@@ -151,6 +154,7 @@ nav ul .search input{
     }
     nav ul li.search{
         width: 50vmin;
+        display: none;
     }
     nav ul li input{
         width: 40vmin;
