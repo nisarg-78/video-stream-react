@@ -1,5 +1,5 @@
 import styles from "./Feed.module.css"
-import { ENDPOINT } from "../urls"
+import { ENDPOINT, CDN } from "../urls"
 import { useEffect, useState, useContext } from "react"
 
 import { FeedContext } from "../contexts/FeedContext"
@@ -41,7 +41,7 @@ export default function Feed() {
                             key={video._id}
                             id={video.id}
                             title={video.title}
-                            img={globalThis.cdnUrl + video.thumbnail}
+                            img={CDN + video.thumbnail}
                         />
                     ))}
                 </div>
