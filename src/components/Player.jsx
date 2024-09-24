@@ -46,7 +46,7 @@ export default function Player() {
 			try {
 				const source = location?.state?.src
 					? location?.state?.src
-					: `${ENDPOINT}/videos/${id}/master.m3u8`
+					: `${ENDPOINT}/videos/${id}`
 				setSrc(source)
 				if (isDev) {
 					setSrc(
