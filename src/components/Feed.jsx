@@ -11,8 +11,7 @@ export default function Feed() {
 
     useEffect(() => {
         const authenticateUser = async () => {
-            // accept the cookie
-            await fetch(`${ENDPOINT}/auth/cookie`, {
+            await fetch(`${ENDPOINT}/credentials/cookie`, {
                 credentials: "include",
             })
         }
@@ -42,7 +41,7 @@ export default function Feed() {
                             key={video._id}
                             id={video.id}
                             title={video.title}
-                            img={video.thumbnail}
+                            img={globalThis.cdnUrl + video.thumbnail}
                         />
                     ))}
                 </div>
