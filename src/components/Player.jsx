@@ -46,7 +46,7 @@ export default function Player() {
 			try {
 				const source = location?.state?.src
 					? location?.state?.src
-					: `${ENDPOINT}/videos/${id}`
+					: `${ENDPOINT}/videos/master/${id}`
 				setSrc(source)
 				if (isDev) {
 					setSrc(
@@ -54,21 +54,21 @@ export default function Player() {
 					)
 				}
 
-				const response = await fetch(`${ENDPOINT}/videos/info?id=${id}`)
+				const response = await fetch(`${ENDPOINT}/videos/info/${id}`)
 				const data = await response.json()
-				if (data[0]) {
-					setVideoJson(data[0])
+				console.log("data", data)
+				if (data) {
+					setVideoJson(data)
 
 					const similarVideosResponse = await fetch(
-						`${ENDPOINT}/videos/all?tags=${data[0]?.tags?.join(
+						`${ENDPOINT}/videos/all?tags=${data?.tags?.join(
 							","
 						)}`
 					)
 					const similarVideosData = await similarVideosResponse.json()
+					console.log("similarVideosData", similarVideosData)
 
-					if (similarVideosData[0]) {
-						setSimilarVideos(similarVideosData)
-					}
+					if (similarVideosData) setSimilarVideos(similarVideosData)
 				}
 			} catch (err) {
 				console.log(err)

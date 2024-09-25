@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ENDPOINT } from "../urls";
+import { CDN, ENDPOINT } from "../urls";
 import "./Navbar.css";
 import logo from "../assets/logo-no-background.png";
 import { useState } from "react";
@@ -64,7 +64,7 @@ function SearchResultItem({ video }) {
   return (
     <Link to={video.id} onClick={() => setSearchTerm("")}>
       <div className="search-result-item">
-        <img src={video.thumbnail} />
+        <img src={CDN + video.thumbnail} />
         <p>{video.title}</p>
       </div>
     </Link>
