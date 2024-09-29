@@ -45,8 +45,8 @@ export default function Player() {
 		const fetchData = async () => {
 			try {
 				const source = location?.state?.src
-					? location?.state?.src
-					: `${ENDPOINT}/videos/master/${id}`
+          ? location?.state?.src
+          : `${CDN}/videos/${id}/master.m3u8`;
 				setSrc(source)
 				if (isDev) {
 					setSrc(
@@ -253,12 +253,7 @@ export default function Player() {
 						config={{
 							file: {
 								hlsOptions: {
-									xhrSetup: function (xhr, url) {
-										xhr.withCredentials = isDev
-											? false
-											: true // send cookies
-									},
-									maxMaxBufferLength: 15,
+									maxMaxBufferLength: 12,
 								},
 							},
 						}}
@@ -445,7 +440,7 @@ export default function Player() {
 												key={video._id}
 												id={video.id}
 												title={video.title}
-												img={video.thumbnail}
+												img={CDN + video.thumbnail}
 											/>
 										</div>
 									)
